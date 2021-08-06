@@ -11,7 +11,8 @@ $queryString = "api-version=5.1"
 Write-Host "ADO Pat Token = " $pat
 # Create header with PAT
 $token = [System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes(":$($pat)"))
-$header = @{authorization = "Basic $token"}
+# $header = @{authorization = "Basic $token"}
+$header = @{authorization = ("Basic $token")}
 
 # Get the list of all projects in the organization
 $projectsUrl = "$orgUrl/_apis/projects?$queryString"

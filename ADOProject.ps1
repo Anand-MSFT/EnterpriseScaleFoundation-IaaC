@@ -1,6 +1,10 @@
+#Fetch parameter value from ADOProect-parameter.json file
+$JSONFromFile = Get-Content -Raw -Path .\ADOProject-parameter.json | ConvertFrom-Json
 # Define organization base url, PAT and API version variables
-$orgUrl = "https://dev.azure.com/DemoWebAppOrg" # "https://dev.azure.com/$JSONFromFile.ADO-Organization"
-$pat = "{Put your ADO PAT Token here}" # "$JSONFromFile.ADO-PAT"
+$adoOrganization = $JSONFromFile.Organization
+$orgUrl = "https://dev.azure.com/$adoOrganization" # "https://dev.azure.com/$JSONFromFile.ADO-Organization"
+$pat = $JSONFromFile.Pat
+$projectName = $JSONFromFile.ProjectName # "$JSONFromFile.ADO-PAT"
 $queryString = "api-version=5.1"
 
 # Create header with PAT
@@ -44,11 +48,8 @@ function checkStatus{
     Write-Host "Status of your request is :" $response.status
 }
 
-# Create new project named Demo
-$projectName = "ADORESTAPI-Project"
-
 function createProject{
-    $confirmation = Read-Host "Are you sure you want to Create the project $($projectName) (y/n)"
+    $confirmation = $JSONFromFile.CreateNewProject # Read-Host "Are you sure you want to Create the project $($projectName) (y/n)"
     if ($confirmation.ToLower() -eq 'y') {
         $projectExist = isProjectExist -projectName $projectName
         if(!$projectExist)
@@ -97,21 +98,26 @@ function getProjectDetails{
 
 function deleteProject{
     # Delete Project
-    $confirmation = Read-Host "Are you sure you want to delete the project $($projectName) (y/n)"
+    $confirmation = $JSONFromFile.DeleteExistingProject # Read-Host "Are you sure you want to delete the project $($projectName) (y/n)"
     if ($confirmation.ToLower() -eq 'y') {
         #Get Projectid
         $projectDetailsUrl = "$orgUrl/_apis/projects/$($projectName)?includeCapabilities=True&$queryString"
         $projectDetails = Invoke-RestMethod -Uri $projectDetailsURL -Method Get -ContentType "application/json" -Headers $header
         $projectId = $projectDetails.id
-
+        if(-not ([string]::IsNullOrEmpty($projectId)))
+        {
         # Delete a project
         $deleteURL = "$orgUrl/_apis/projects/$($projectId)?$queryString"
         $response = Invoke-RestMethod -Uri $deleteURL -Method Delete -ContentType "application/json" -Headers $header
         $deleteprojectId = $response.Id
-        if (-not ([string]::IsNullOrEmpty($deleteprojectId)))
-        {
-            checkStatus -responseId $deleteprojectId
-        }
+            if (-not ([string]::IsNullOrEmpty($deleteprojectId)))
+            {
+                checkStatus -responseId $deleteprojectId
+            }
+            else {
+                Write-Host "Could not delete this project $projectName, please refer error logs for more detail"
+            }   
+        }   
         else {
             Write-Host "Project with name $projectName amd id $deleteprojectId does not exist"
         }

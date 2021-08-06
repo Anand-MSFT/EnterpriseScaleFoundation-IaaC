@@ -1,5 +1,7 @@
 {
-    "Pat": "77e4khf64cak6hkd2fppery75emibfkifh4jw7salvfyqtyvk37q",
+    "Pat": "t4l3wakw23d3wrqphass2624452dftq4a4fiq7qipt445fjtfumq",
     "Organization": "DemoWebAppOrg",
-    "ProjectName": "ADO-REST-API-Project"
+    "ProjectName": "ADO-REST-API-Project",
+    "CreateNewProject" : "n",
+    "DeleteExistingProject" : "y"
 }

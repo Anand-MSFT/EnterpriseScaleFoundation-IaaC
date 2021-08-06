@@ -24,8 +24,8 @@ function GetUrl() {
     return $areaUrl
 }
 
-$orgUrl = "https://dev.azure.com/DemoWebAppOrg"
-$personalToken = "e7awvivq5c5gqzq3dkepooc2dq57uhu2myanh5b25kgfsjcdjsla"
+$orgUrl = "https://dev.azure.com/DemoAndPoC"
+$personalToken = "adexjl6worflosserozixvifqwvv4f6w4ann7pwqcjzjxgd47cyq"
 
 Write-Host "Initialize authentication context" -ForegroundColor Yellow
 $token = [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes(":$($personalToken)"))

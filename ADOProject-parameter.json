@@ -3,5 +3,5 @@
     "Organization": "DemoAndPoC",
     "ProjectName": "ADO-REST-API-Project",
     "CreateNewProject" : "y",
-    "DeleteExistingProject" : "y"
+    "DeleteExistingProject" : "n"
 }

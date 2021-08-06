@@ -28,8 +28,8 @@ $orgUrl = "https://dev.azure.com/DemoWebAppOrg"
 $personalToken = "e7awvivq5c5gqzq3dkepooc2dq57uhu2myanh5b25kgfsjcdjsla"
 
 Write-Host "Initialize authentication context" -ForegroundColor Yellow
-$token = [System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes(":$($personalToken)"))
-$header = @{authorization = "Basic $token"}
+$token = [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes(":$($personalToken)"))
+$header = @{authorization = ("Basic $token")}
 
 # DEMO 1 List of projects
 Write-Host "Demo 1"

@@ -1,6 +1,6 @@
 #Fetch parameter value from ADOProect-parameter.json file
 $JSONFromFile = Get-Content -Raw -Path .\ADOProject-parameter.json | ConvertFrom-Json
-Write-Host "ADO Pat Token = " $JSONFromFile.Pat
+#Write-Host "ADO Pat Token = " $JSONFromFile.Pat
 Write-Host "ADO Project Name = " $JSONFromFile.ProjectName
 Write-Host "ADO Organization = " $JSONFromFile.Organization
 $adoOrganization = $JSONFromFile.Organization
@@ -8,8 +8,9 @@ $orgUrl = "https://dev.azure.com/$adoOrganization"
 $pat = "$JSONFromFile.Pat"
 $queryString = "api-version=5.1"
 
+Write-Host "ADO Pat Token = " $pat
 # Create header with PAT
-$token = [System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes(":$($pat)"))
+$token = [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes(":$($pat)"))
 $header = @{authorization = "Basic $token"}
 
 # Get the list of all projects in the organization

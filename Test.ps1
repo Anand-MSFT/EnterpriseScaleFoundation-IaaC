@@ -15,7 +15,7 @@ $header = @{authorization = "Basic $token"}
 # Get the list of all projects in the organization
 $projectsUrl = "$orgUrl/_apis/projects?$queryString"
 Write-Host "ProjectsURL : $projectsUrl" 
-function getAllProjectslist{
+#function getAllProjectslist{
     # get and list all projects under current organization
     Write-Host"Inside getAllProjectlist function, ready to execute command"
     $projects = Invoke-RestMethod -Uri $projectsUrl -Method Get -ContentType "application/json" -Headers $header
@@ -23,4 +23,6 @@ function getAllProjectslist{
     $projects.value | ForEach-Object {
     Write-Host $_.id $_.name
     }
-}
+# }
+
+# getAllProjectslist

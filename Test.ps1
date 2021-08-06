@@ -17,7 +17,7 @@ $projectsUrl = "$orgUrl/_apis/projects?$queryString"
 Write-Host "ProjectsURL : $projectsUrl" 
 #function getAllProjectslist{
     # get and list all projects under current organization
-    Write-Host"Inside getAllProjectlist function, ready to execute command"
+    Write-Host "Ready to execute REST API request from PS script"
     $projects = Invoke-RestMethod -Uri $projectsUrl -Method Get -ContentType "application/json" -Headers $header
     Write-Host $projects | ConvertTo-Json
     $projects.value | ForEach-Object {

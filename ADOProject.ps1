@@ -10,7 +10,7 @@ $queryString = "api-version=5.1"
 # Create header with PAT
 $token = [System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes(":$($pat)"))
 #$header = @{authorization = "Basic $token"}
-$header = @{authorization = 'Bearer $env:SYSTEM_ACCESSTOKEN'}
+$header = @{"X-Requested-With"="powershell";"Authorization"="Bearer $env:SYSTEM_ACCESSTOKEN"}
 
 # Get the list of all projects in the organization
 $projectsUrl = "$orgUrl/_apis/projects?$queryString"

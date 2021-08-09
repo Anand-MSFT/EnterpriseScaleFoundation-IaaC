@@ -30,7 +30,9 @@ $personalToken = "adexjl6worflosserozixvifqwvv4f6w4ann7pwqcjzjxgd47cyq"
 Write-Host "Initialize authentication context" -ForegroundColor Yellow
 $token = [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes(":$($personalToken)"))
 #$header = @{authorization = ("Basic $token")}
-$header = @{"X-Requested-With"="powershell";"Authorization"="Basic $token"}
+#$header = @{"X-Requested-With"="powershell";"Authorization"="Basic $token"}
+$header = @{"X-Requested-With"="powershell";"Authorization"="Bearer $env:SYSTEM_ACCESSTOKEN"}
+
 # DEMO 1 List of projects
 Write-Host "Demo 1"
 $coreAreaId = "79134c72-4a58-4b42-976c-04e7115f32bf"

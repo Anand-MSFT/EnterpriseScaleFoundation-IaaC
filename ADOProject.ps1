@@ -7,11 +7,11 @@ $pat = $JSONFromFile.Pat
 $projectName = $JSONFromFile.ProjectName # "$JSONFromFile.ADO-PAT"
 $queryString = "api-version=5.1"
 
-# Create header with PAT
-$token = [System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes(":$($pat)"))
+# Create header with PAT, uncomment below two line if you want to use PAT token based authentication
+# $token = [System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes(":$($pat)"))
 #$header = @{authorization = "Basic $token"}
-$accessToken = $env:SYSTEM_ACCESSTOKEN
-Write-Host "Bearer token : " $accessToken
+
+# Below header will allow to use Azure DevOps agent pool Oauth Bearer token to authentication and authorization
 $header = @{"X-Requested-With"="powershell";"Authorization"="Bearer $env:SYSTEM_ACCESSTOKEN"}
 
 # Get the list of all projects in the organization

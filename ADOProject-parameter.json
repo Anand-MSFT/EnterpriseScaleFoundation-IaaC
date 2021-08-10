@@ -1,7 +1,7 @@
 {
     "Pat": "",
-    "Organization": "ADORESTAPI",
+    "Organization": "DemoAndPoC",
     "ProjectName": "ADO-REST-API-Project",
-    "CreateNewProject" : "y",
-    "DeleteExistingProject" : "n"
+    "CreateNewProject" : "n",
+    "DeleteExistingProject" : "y"
 }

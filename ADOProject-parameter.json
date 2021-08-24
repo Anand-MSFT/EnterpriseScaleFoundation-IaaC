@@ -2,6 +2,6 @@
     "Pat": "",
     "Organization": "DemoAndPoC",
     "ProjectName": "ADO-REST-API-NewProject2",
-    "CreateNewProject" : "y",
-    "DeleteExistingProject" : "n"
+    "CreateNewProject" : "n",
+    "DeleteExistingProject" : "y"
 }
